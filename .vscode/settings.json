@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.C": "c",
+        "CA1_Exercise2_source_code_SehaLee.C": "cpp",
+        "iostream": "cpp"
+    }
+}
