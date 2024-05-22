@@ -39,6 +39,9 @@ int main() {
         x += v_old * dt;
         if (i % nout == 0) {
             fprintf(file, "%f %f %f\n", t, x, v);
+            WDrawPoint(myworld, t, x, 1); // Euler x(t) in black        
+            WDrawPoint(myworld, t, v, 1); // Euler v(t) in black
+
         }
     }
 
@@ -48,21 +51,21 @@ int main() {
     FILE *euler_file = fopen("euler_1a.dat", "r");
     FILE *analytic_file = fopen("analytic_1a.dat", "r");
 
-    double t, x_euler, v_euler, x_analytic, v_analytic;
+    double t_euler, x_euler, v_euler, t_analytic, x_analytic, v_analytic;
     int first_point = 1;
     double prev_x_analytic, prev_v_analytic, prev_t;
 
-    while (fscanf(euler_file, "%lf %lf %lf", &t, &x_euler, &v_euler) != EOF &&
-           fscanf(analytic_file, "%lf %lf %lf", &t, &x_analytic, &v_analytic) != EOF) {
-        WDrawPoint(myworld, t, x_euler, 0);
-        WDrawPoint(myworld, t, v_euler, 0);
+    while (fscanf(euler_file, "%lf %lf %lf", &t_euler, &x_euler, &v_euler) != EOF &&
+           fscanf(analytic_file, "%lf %lf %lf", &t_analytic, &x_analytic, &v_analytic) != EOF) {
+        WDrawPoint(myworld, t_euler, x_euler, 1); // Euler x(t) in black
+        WDrawPoint(myworld, t_euler, v_euler, 1); // Euler v(t) in black
 
         if (!first_point) {
-            WDrawLine(myworld, prev_t, prev_x_analytic, t, x_analytic, 1);
-            WDrawLine(myworld, prev_t, prev_v_analytic, t, v_analytic, 2);
+            WDrawLine(myworld, prev_t, prev_x_analytic, t_analytic, x_analytic, 52); // Analytic x(t) in blue
+            WDrawLine(myworld, prev_t, prev_v_analytic, t_analytic, v_analytic, 122); // Analytic v(t) in red
         }
 
-        prev_t = t;
+        prev_t = t_analytic;
         prev_x_analytic = x_analytic;
         prev_v_analytic = v_analytic;
         first_point = 0;
