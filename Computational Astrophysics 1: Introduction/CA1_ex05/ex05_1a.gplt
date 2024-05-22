@@ -1,0 +1,13 @@
+set terminal pngcairo enhanced size 800,600
+set output 'ex05_1a.png'
+
+set title "Ex05 1a"
+set xlabel "Time (t)"
+set ylabel "Position (x) and Velocity (v)"
+set grid
+
+set key outside
+plot 'ex05_1a_euler.dat' using 1:2 with points title 'x (Numerical)' pointtype 7, \
+     'ex05_1a_euler.dat' using 1:3 with points title 'v (Numerical)' pointtype 7, \
+     'ex05_1a_analytic.dat' using 1:2 with lines title 'x (Analytic)', \
+     'ex05_1a_analytic.dat' using 1:3 with lines title 'v (Analytic)'

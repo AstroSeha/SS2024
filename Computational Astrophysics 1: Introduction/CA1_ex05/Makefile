@@ -1,25 +1,17 @@
-PROJECT = ex05_1a
-OBJECTS = $(PROJECT).o Xgraphics.o
+# Makefile for compiling and plotting harmonic oscillator
 
 CXX = g++
-CC = gcc
-CXXFLAGS = -Wall
-CPPLIBS = -lX11
-CPPFLAGS = -I/opt/X11/include
-LDFLAGS = -L/opt/X11/lib
+CXXFLAGS = -O2 -Wall
+TARGET = ex05_1a
 
-.PHONY : clean
+all: $(TARGET) plot
 
-$(PROJECT) : $(OBJECTS)
-	@echo Link project $(@)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $(@) $(OBJECTS) $(CPPLIBS)
+$(TARGET): $(TARGET).cpp
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(TARGET).cpp
 
-.cpp.o : 
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $<
+plot: $(TARGET)
+	./$(TARGET)
+	gnuplot ex05_1a.gplt
 
-.c.o : 
-	$(CC) $(CXXFLAGS) $(CPPFLAGS) -c $<
-
-clean :
-	rm -f $(OBJECTS)
-	rm -f $(PROJECT)
+clean:
+	rm -f $(TARGET) ex05_1a_euler.dat ex05_1a_analytic.dat ex05_1a.png
