@@ -1,15 +1,25 @@
+PROJECT = ex05_1a
+OBJECTS = $(PROJECT).o Xgraphics.o
+
+CXX = g++
 CC = gcc
-CFLAGS = -Wall -std=c11
-EXEC = ex05_1a
-SRC = ex05_1a.c Xgraphics.c
-LIBS = -lX11
+CXXFLAGS = -Wall
+CPPLIBS = -lX11
+CPPFLAGS = -I/opt/X11/include
+LDFLAGS = -L/opt/X11/lib
 
-all: $(EXEC)
+.PHONY : clean
 
-$(EXEC): $(SRC)
-	$(CC) $(CFLAGS) -o $(EXEC) $(SRC) $(LIBS)
+$(PROJECT) : $(OBJECTS)
+	@echo Link project $(@)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $(@) $(OBJECTS) $(CPPLIBS)
 
-clean:
-	rm -f $(EXEC)
+.cpp.o : 
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $<
 
-.PHONY: all clean
+.c.o : 
+	$(CC) $(CXXFLAGS) $(CPPFLAGS) -c $<
+
+clean :
+	rm -f $(OBJECTS)
+	rm -f $(PROJECT)
