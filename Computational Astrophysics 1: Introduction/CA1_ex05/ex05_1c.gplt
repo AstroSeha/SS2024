@@ -1,0 +1,15 @@
+set terminal pngcairo enhanced size 800,600
+set output 'ex05_1c.png'
+
+set title "Harmonic Oscillator: Euler-Cromer Method vs Analytic (Reduced Steps)"
+set xlabel "Time (t)"
+set ylabel "Position (x)"
+set grid
+
+set key outside
+plot 'ex05_1a_euler.dat' using 1:2 with points title 'x (Numerical, Task 1a)' pointtype 7, \
+     'ex05_1a_analytic.dat' using 1:2 with lines title 'x (Analytic, Task 1a)', \
+     'ex05_1b_euler.dat' using 1:2 with points title 'x (Numerical, Task 1b)' pointtype 7, \
+     'ex05_1b_analytic.dat' using 1:2 with lines title 'x (Analytic, Task 1b)', \
+     'ex05_1c_euler_cromer.dat' using 1:2 with points title 'x (Numerical, Task 1c)' pointtype 7, \
+     'ex05_1c_analytic.dat' using 1:2 with lines title 'x (Analytic, Task 1c)'
