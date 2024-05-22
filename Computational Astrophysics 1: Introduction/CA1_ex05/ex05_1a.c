@@ -1,11 +1,11 @@
-#include <cmath>
+#include <math.h>
 #include <unistd.h>
 #include "Xgraphics.h"
 
 int main() {
     int n = 10001, nout = 500;
     double t, v, v_old, x;
-    const double dt = 2.0 * M_PI / double(n - 1);
+    const double dt = 2.0 * M_PI / (n - 1);
     x = 1.0;
     t = 0.0;
     v = 0.0;
@@ -19,7 +19,7 @@ int main() {
 
     mywindow = CreateWindow(
         800, 600,
-        (char*)"Harmonic Oscillator"
+        "Harmonic Oscillator"
     );
     myworld = CreateWorld(
         mywindow,
