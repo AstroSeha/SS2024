@@ -38,12 +38,13 @@ void output(const string& filename) {
     font_info = XLoadQueryFont(display, "-*-helvetica-*-r-*-*-24-*-*-*-*-*-*-*");
     XSetFont(display, gc, font_info->fid);
 
-    XColor yellow, blue, white;
+    XColor yellow, blue, white, violet;
     Colormap colormap = DefaultColormap(display, screen);
 
     // different colors
     XAllocNamedColor(display, colormap, "Gold", &yellow, &yellow);
     XAllocNamedColor(display, colormap, "CornflowerBlue", &blue, &blue);
+    XAllocNamedColor(display, colormap, "MediumPurple", &violet, &violet);
     XAllocNamedColor(display, colormap, "LightSteelBlue", &white, &white);
 
     XEvent e;
@@ -59,13 +60,20 @@ void output(const string& filename) {
             XFillArc(display, window, gc, 225, 225, 50, 50, 0, 360 * 64);
 
             // Scale factor for the orbit
-            double scale = 100;
 
-            XSetForeground(display, gc, blue.pixel);
+            
+            // the planet: blue for inner planets, violet for outer planets
+            // XSetForeground(display, gc, blue.pixel);
+            // for (size_t i = 0; i < x.size(); ++i) {
+            //     int px = static_cast<int>((x[i] * 175) + 250);
+            //     int py = static_cast<int>((y[i] * 175) + 250);
+            //     XFillArc(display, window, gc, px - 8, py - 8, 16, 16, 0, 360 * 64);
+            // }
+
+            XSetForeground(display, gc, violet.pixel);
             for (size_t i = 0; i < x.size(); ++i) {
-                int px = static_cast<int>((x[i] * scale) + 250);
-                int py = static_cast<int>((y[i] * scale) + 250);
-                // the planet
+                int px = static_cast<int>((x[i] * 10) + 250);
+                int py = static_cast<int>((y[i] * 10) + 250);
                 XFillArc(display, window, gc, px - 8, py - 8, 16, 16, 0, 360 * 64);
             }
 

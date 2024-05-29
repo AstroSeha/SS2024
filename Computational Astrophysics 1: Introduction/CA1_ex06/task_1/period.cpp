@@ -5,22 +5,25 @@
 
 using namespace std;
 
+
+// period: time taken to complete one orbit
 double experimental_period(double x[], double y[], int N, double dt) {
-    double period = 0.0;
-    for (int i = 0; i < N; ++i) {
-        period += dt;
-        if (y[i] * y[i-1] < 0) {
-            break;
+    double reference_x = x[0]; // Reference position
+
+    // find the next position where x = reference_x
+    for (int i = 100; i < N; ++i) {
+        if (abs(x[i] - reference_x)/abs(reference_x) < 1e-5) {
+            return dt * i;
         }
     }
-    return 2*period;
 
-
+    return -1.0; // when not found
 }
-double theoretical_period(double x[], double y[], int N, double dt){
-    // when crossing x-axis, it is either semi-major or semi-minor axis
+// Kepler's third law T^2 ~ a^3
+double theoretical_period(double x[], double y[], int N, double dt) {
     double r1 = abs(x[0]);
-    double r2 = 0.;
+    double r2 = 0.0;
+
     for (int i = 1; i < N; ++i) {
         if (y[i] * y[i-1] < 0) {
             r2 = sqrt(x[i] * x[i] + y[i] * y[i]);
@@ -29,11 +32,12 @@ double theoretical_period(double x[], double y[], int N, double dt){
     }
     if (r1 > r2) {
         return pow(r1, 1.5);
-    } else 
+    } else {
         return pow(r2, 1.5);
-    
+    }
 }
 
+// save the results
 void log_results(double x0, double y0, double vx0, double vy0, double dt, int nout, double experimental_period, double theoretical_period) {
     ofstream logfile("period_log.txt", ios_base::app);
     if (!logfile.is_open()) {
@@ -41,7 +45,7 @@ void log_results(double x0, double y0, double vx0, double vy0, double dt, int no
         return;
     }
 
-    // Get current time
+    // get current time
     time_t now = time(0);
     char* dt_now = ctime(&now);
 

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void initial(double& x0, double& y0, double& vx0, double& vy0, double& dt, int& nout);
+void initial(double& x0, double& y0, double& vx0, double& vy0, double& dt);
 void euler_richardson(double x[], double y[], double vx[], double vy[], double r[], int N, double dt);
 void output(const string& filename);
 double experimental_period(double x[], double y[], int N, double dt);
@@ -14,12 +14,11 @@ void log_results(double x0, double y0, double vx0, double vy0, double dt, int no
 
 int main() {
     double x0, y0, vx0, vy0, dt;
-    int nout;
 
-    initial(x0, y0, vx0, vy0, dt, nout);
+    initial(x0, y0, vx0, vy0, dt);
 
-    // set N to be a constant
-    const int N = 1E+4;
+    const int N = 511/dt;
+    const int nout = 0.5/dt;
 
     double* t = new double[N];
     double* x = new double[N];
@@ -50,7 +49,8 @@ int main() {
     }
     outfile.close();
 
-
+    // Calculate the period
+    
 
     double experimental_period_val = experimental_period(x, y, N, dt);
     double theoretical_period_val = theoretical_period(x, y, N, dt);
