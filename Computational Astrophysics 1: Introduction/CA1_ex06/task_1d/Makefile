@@ -1,8 +1,8 @@
 CXX = g++
-CXXFLAGS = -Wall -std=c++11
-LDFLAGS = -lX11
+CXXFLAGS = -std=c++11 -O2
+
 TARGET = output
-SOURCES = main.cpp initial.cpp euler_richardson.cpp output.cpp period.cpp
+SOURCES = main.cpp initial.cpp euler_richardson.cpp perihelion_aphelion.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
 all: $(TARGET)
@@ -17,4 +17,7 @@ clean_objects:
 	rm -f $(OBJECTS)
 
 clean:
-	rm -f $(TARGET) $(OBJECTS) $(filter-out period_log.txt, $(wildcard *.txt))
+	rm -f $(TARGET) $(OBJECTS) $(filter-out peri_ap_log.txt, $(wildcard *.txt))
+
+
+

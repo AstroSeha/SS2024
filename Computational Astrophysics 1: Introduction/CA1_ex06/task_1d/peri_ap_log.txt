@@ -1,0 +1,6 @@
+--------Timestamp: Thu May 30 00:44:15 2024
+
+Perihelion distance: 9.229 AU
+Aphelion distance: 9.84707 AU
+Velocity at perihelion: 9.96886 km/s
+Velocity at aphelion: 9.34315 km/s
