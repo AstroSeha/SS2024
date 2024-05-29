@@ -17,4 +17,4 @@ clean_objects:
 	rm -f $(OBJECTS)
 
 clean:
-	rm -f $(TARGET) $(OBJECTS)
+	rm -f $(TARGET) $(OBJECTS) *.txt

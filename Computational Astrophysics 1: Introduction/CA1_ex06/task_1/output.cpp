@@ -22,11 +22,12 @@ void output(const string& filename) {
     Window window;
     int screen;
     GC gc;
+    XFontStruct *font_info;
 
     display = XOpenDisplay(NULL);
 
     screen = DefaultScreen(display);
-    window = XCreateSimpleWindow(display, RootWindow(display, screen), 10, 10, 800, 800, 1,
+    window = XCreateSimpleWindow(display, RootWindow(display, screen), 10, 10, 500, 500, 1,
                                  BlackPixel(display, screen), WhitePixel(display, screen));
 
     XSelectInput(display, window, ExposureMask | KeyPressMask);
@@ -34,13 +35,16 @@ void output(const string& filename) {
 
     gc = XCreateGC(display, window, 0, NULL);
 
+    font_info = XLoadQueryFont(display, "-*-helvetica-*-r-*-*-24-*-*-*-*-*-*-*");
+    XSetFont(display, gc, font_info->fid);
+
     XColor yellow, blue, white;
     Colormap colormap = DefaultColormap(display, screen);
 
     // different colors
-    XAllocNamedColor(display, colormap, "Yellow", &yellow, &yellow);
-    XAllocNamedColor(display, colormap, "DeepSkyBlue", &blue, &blue);
-    XAllocNamedColor(display, colormap, "White", &white, &white);
+    XAllocNamedColor(display, colormap, "Gold", &yellow, &yellow);
+    XAllocNamedColor(display, colormap, "CornflowerBlue", &blue, &blue);
+    XAllocNamedColor(display, colormap, "LightSteelBlue", &white, &white);
 
     XEvent e;
     while (true) {
@@ -48,16 +52,21 @@ void output(const string& filename) {
 
         if (e.type == Expose) {
             XSetForeground(display, gc, BlackPixel(display, screen));
-            XFillRectangle(display, window, gc, 0, 0, 800, 800);
+            XFillRectangle(display, window, gc, 0, 0, 500, 500);
 
+            // the Sun at the center
             XSetForeground(display, gc, yellow.pixel);
-            XFillArc(display, window, gc, 390, 390, 20, 20, 0, 360 * 64);
+            XFillArc(display, window, gc, 225, 225, 50, 50, 0, 360 * 64);
+
+            // Scale factor for the orbit
+            double scale = 100;
 
             XSetForeground(display, gc, blue.pixel);
             for (size_t i = 0; i < x.size(); ++i) {
-                int px = static_cast<int>((x[i] * 100) + 400);
-                int py = static_cast<int>((y[i] * 100) + 400);
-                XFillArc(display, window, gc, px - 4, py - 4, 8, 8, 0, 360 * 64);
+                int px = static_cast<int>((x[i] * scale) + 250);
+                int py = static_cast<int>((y[i] * scale) + 250);
+                // the planet
+                XFillArc(display, window, gc, px - 8, py - 8, 16, 16, 0, 360 * 64);
             }
 
             // Display the filename
