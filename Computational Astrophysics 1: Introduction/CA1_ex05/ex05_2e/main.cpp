@@ -5,7 +5,7 @@
 using namespace std;
 
 void initial(double& x0, double& y0, double& vx0, double& vy0, double& dt, int& nout);
-void euler(double x[], double y[], double vx[], double vy[], double r[], int N, double dt);
+void euler_richardson(double x[], double y[], double vx[], double vy[], double r[], int N, double dt);
 void euler_cromer(double x[], double y[], double vx[], double vy[], double r[], int N, double dt);
 float energy(double x, double y, double vx, double vy);
 void output();
@@ -37,7 +37,7 @@ int main() {
     vx_euler[0] = vx_cromer[0] = vx0;
     vy_euler[0] = vy_cromer[0] = vy0;
 
-    euler(x_euler, y_euler, vx_euler, vy_euler, r_euler, N, dt);
+    euler_richardson(x_euler, y_euler, vx_euler, vy_euler, r_euler, N, dt);
     euler_cromer(x_cromer, y_cromer, vx_cromer, vy_cromer, r_cromer, N, dt);
 
     for (int i = 1; i < N; ++i) {

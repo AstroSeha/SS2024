@@ -6,7 +6,7 @@ const double GM = 4 * M_PI * M_PI;
 
 // Euler-Cromer method
 // update the velocities first and then the positions
-void euler(double x[], double y[], double vx[], double vy[], double r[], int N, double dt) {
+void euler_richardson(double x[], double y[], double vx[], double vy[], double r[], int N, double dt) {
     for (int i = 0; i < N-1; i++) {
         r[i] = sqrt(x[i]*x[i] + y[i]*y[i]);
         vx[i+1] = vx[i] - (GM / pow(r[i], 3)) * x[i] * dt;

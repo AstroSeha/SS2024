@@ -5,7 +5,7 @@
 using namespace std;
 
 void initial(double& x0, double& y0, double& vx0, double& vy0, double& dt, int& nout);
-void euler(double x[], double y[], double vx[], double vy[], double r[], int N, double dt);
+void euler_richardson(double x[], double y[], double vx[], double vy[], double r[], int N, double dt);
 void output();
 
 int main() {
@@ -30,7 +30,7 @@ int main() {
     vx[0] = vx0;
     vy[0] = vy0;
 
-    euler(x, y, vx, vy, r, N, dt);
+    euler_richardson(x, y, vx, vy, r, N, dt);
 
     for (int i = 1; i < N; ++i) {
         t[i] = t[i-1] + dt;
