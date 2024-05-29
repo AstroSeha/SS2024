@@ -192,3 +192,51 @@ Time step: 0.001, nout: 103
 Experimental period: 1.514 years
 Theoretical period: 2.09195 years
 -----------------------------------------
+Timestamp: Wed May 29 20:23:48 2024
+Initial conditions: x0 = -1, y0 = 0, vx0 = 0, vy0 = 7
+Time step: 0.001, nout: 103
+Experimental period: 1.514 years
+Theoretical period: 2.09195 years
+-----------------------------------------
+Timestamp: Wed May 29 20:25:23 2024
+Initial conditions: x0 = 0.39, y0 = 0, vx0 = 0, vy0 = 10.1
+Time step: 0.001, nout: 103
+Experimental period: 0.248 years
+Theoretical period: 0.249455 years
+-----------------------------------------
+Timestamp: Wed May 29 20:26:21 2024
+Initial conditions: x0 = 39.482, y0 = 0, vx0 = 0, vy0 = 0.16
+Time step: 0.001, nout: 103
+Experimental period: -1 years
+Theoretical period: 248.084 years
+-----------------------------------------
+Timestamp: Wed May 29 20:27:12 2024
+Initial conditions: x0 = 39.482, y0 = 0, vx0 = 0, vy0 = 0.16
+Time step: 0.1, nout: 103
+Experimental period: 89.6 years
+Theoretical period: 248.084 years
+-----------------------------------------
+Timestamp: Wed May 29 20:29:16 2024
+Initial conditions: x0 = -1, y0 = 0, vx0 = 0, vy0 = 7
+Time step: 0.001, nout: 103
+Experimental period: 1.514 years
+Theoretical period: 2.09195 years
+-----------------------------------------
+Timestamp: Wed May 29 20:35:32 2024
+Initial conditions: x0 = -1, y0 = 0, vx0 = 0, vy0 = 7
+Time step: 0.001, nout: 103
+Experimental period: 1.514 years
+Theoretical period: 2.09195 years
+-----------------------------------------
+Timestamp: Wed May 29 20:37:05 2024
+Initial conditions: x0 = -1, y0 = 0, vx0 = 0, vy0 = 7
+Time step: 0.001, nout: 109
+Experimental period: 1.516 years
+Theoretical period: 2.09195 years
+-----------------------------------------
+Timestamp: Wed May 29 20:39:53 2024
+Initial conditions: x0 = -1, y0 = 0, vx0 = 0, vy0 = 7
+Time step: 0.001, nout: 203
+Experimental period: 1.516 years
+Theoretical period: 2.09195 years
+-----------------------------------------

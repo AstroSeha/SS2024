@@ -5,21 +5,21 @@
 
 using namespace std;
 
-double compute_period(double x[], double y[], int N, double dt) {
-    // when crossing x-axis (y = 0) is half the period
-    for (int i = 1; i < N; ++i) {
+double experimental_period(double x[], double y[], int N, double dt) {
+    double period = 0.0;
+    for (int i = 0; i < N; ++i) {
+        period += dt;
         if (y[i] * y[i-1] < 0) {
-            cout << " i: " << i << endl;
-            cout << "x[i]: " << x[i] << endl;
-            return 2 * dt * i;
+            break;
         }
     }
-    return -1;
-}
+    return 2*period;
 
+
+}
 double theoretical_period(double x[], double y[], int N, double dt){
     // when crossing x-axis, it is either semi-major or semi-minor axis
-    double r1 = x[0];
+    double r1 = abs(x[0]);
     double r2 = 0.;
     for (int i = 1; i < N; ++i) {
         if (y[i] * y[i-1] < 0) {
@@ -27,15 +27,12 @@ double theoretical_period(double x[], double y[], int N, double dt){
             break;
         }
     }
-    cout << "r1: " << r1 << endl;
-    cout << "r2: " << r2 << endl;
     if (r1 > r2) {
         return pow(r1, 1.5);
     } else 
         return pow(r2, 1.5);
     
 }
-
 
 void log_results(double x0, double y0, double vx0, double vy0, double dt, int nout, double experimental_period, double theoretical_period) {
     ofstream logfile("period_log.txt", ios_base::app);

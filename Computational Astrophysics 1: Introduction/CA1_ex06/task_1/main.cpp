@@ -8,7 +8,7 @@ using namespace std;
 void initial(double& x0, double& y0, double& vx0, double& vy0, double& dt, int& nout);
 void euler_richardson(double x[], double y[], double vx[], double vy[], double r[], int N, double dt);
 void output(const string& filename);
-double compute_period(double x[], double y[], int N, double dt);
+double experimental_period(double x[], double y[], int N, double dt);
 double theoretical_period(double x[], double y[], int N, double dt);
 void log_results(double x0, double y0, double vx0, double vy0, double dt, int nout, double experimental_period, double theoretical_period);
 
@@ -52,13 +52,13 @@ int main() {
 
 
 
-    double experimental_period = compute_period(x, y, N, dt);
+    double experimental_period_val = experimental_period(x, y, N, dt);
     double theoretical_period_val = theoretical_period(x, y, N, dt);
 
-    cout << "Experimental period: " << experimental_period << " years" << endl;
+    cout << "Experimental period: " << experimental_period_val << " years" << endl;
     cout << "Theoretical period: " << theoretical_period_val << " years" << endl;
 
-    log_results(x0, y0, vx0, vy0, dt, nout, experimental_period, theoretical_period_val);
+    log_results(x0, y0, vx0, vy0, dt, nout, experimental_period_val, theoretical_period_val);
 
     output(filename.str());
 
