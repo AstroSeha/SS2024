@@ -1,23 +1,21 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -O2
-
+OBJS = main.o euler.o euler_cromer.o euler_richardson.o rk4.o energy.o initial.o period.o
 TARGET = output
-SOURCES = main.cpp initial.cpp euler_richardson.cpp perihelion_aphelion.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
 
-all: $(TARGET)
+all: $(TARGET) plot clean_objs
 
-$(TARGET): $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean_objects:
-	rm -f $(OBJECTS)
+plot:
+	gnuplot figure.gplt
+
+clean_objs:
+	rm -f $(OBJS)
 
 clean:
-	rm -f $(TARGET) $(OBJECTS) $(filter-out peri_ap_log.txt, $(wildcard *.txt))
-
-
-
+	rm -f $(OBJS) $(TARGET) accuracy.dat accuracy_plot.png
