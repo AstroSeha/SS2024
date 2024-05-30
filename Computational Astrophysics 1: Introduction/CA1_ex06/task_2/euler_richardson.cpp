@@ -1,8 +1,6 @@
 #include <cmath>
-
+#include "constants.h"
 using namespace std;
-
-const double GM = 4 * M_PI * M_PI;
 
 // Euler-Richardson method (midpoint method)
 void euler_richardson(double x[], double y[], double vx[], double vy[], double r[], int N, double dt) {

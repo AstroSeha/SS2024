@@ -1,8 +1,6 @@
 #include <cmath>
-
+#include "constants.h"
 using namespace std;
-
-const double GM = 4 * M_PI * M_PI;
 
 // Euler-Cromer method
 // update the velocities first and then the positions

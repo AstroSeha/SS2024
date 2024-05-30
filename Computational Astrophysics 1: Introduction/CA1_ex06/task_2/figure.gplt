@@ -8,4 +8,5 @@ set grid
 plot "accuracy.dat" using 1:2 title "Euler" with linespoints, \
      "accuracy.dat" using 1:3 title "Euler-Cromer" with linespoints, \
      "accuracy.dat" using 1:4 title "Euler-Richardson" with linespoints, \
-     "accuracy.dat" using 1:5 title "RK4" with linespoints
+     "accuracy.dat" using 1:5 title "RK4, double" with linespoints,\
+     "accuracy.dat" using 1:6 title "RK4, float" with linespoints
