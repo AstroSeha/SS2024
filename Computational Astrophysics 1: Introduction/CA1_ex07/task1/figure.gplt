@@ -1,0 +1,10 @@
+set terminal pngcairo size 800,600
+set output 'errors.png'
+set logscale xy
+set xlabel 'log10(h)'
+set ylabel 'log10(|E|)'
+set title 'Numerical Differentiation Errors'
+set grid
+plot 'data.txt' using 1:($2) title 'Forward Error' with linespoints, \
+     'data.txt' using 1:($3) title 'Central Error' with linespoints, \
+     'data.txt' using 1:($4) title 'Extrapolated Error' with linespoints
