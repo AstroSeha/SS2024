@@ -1,0 +1,10 @@
+set terminal pngcairo size 800,600
+set output 'slopes.png'
+set logscale x
+set xlabel 'log10(h)'
+set ylabel 'slope'
+set title 'Slopes of Errors from Log-Log Plot'
+set grid
+plot 'slope.txt' using 1:($2) title 'Forward Error' with linespoints, \
+     'slope.txt' using 1:($3) title 'Central Error' with linespoints, \
+     'slope.txt' using 1:($4) title 'Extrapolated Error' with linespoints

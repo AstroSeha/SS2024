@@ -9,6 +9,7 @@ output: main.cpp
 run: output
 	./output
 	gnuplot figure.gplt
+	gnuplot figure2.gplt
 
 clean:
 	rm -f output 

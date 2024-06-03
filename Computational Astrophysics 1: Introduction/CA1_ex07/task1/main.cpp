@@ -24,15 +24,18 @@ int main() {
     double h = 1.0;
     double epsilon = numeric_limits<double>::epsilon();
     double exact = exp(x);
-    
+
+    ofstream file("data.txt");
+
     cout << setw(15) << "h" 
              << setw(20) << "Forward_Error" 
              << setw(20) << "Central_Error" 
              << setw(25) << "Extrapolated_Error" << endl;
 
-    ofstream file("data.txt");
-     for (int i = 0; i < 16; i++) {
-        data[i][0] = log(h);
+    int i = 0;
+
+    while (h > epsilon){
+        data[i][0] = h;
         
         double fwd_diff = forward(exp, x, h);
         double cen_diff = central(exp, x, h);
@@ -46,25 +49,40 @@ int main() {
         data[i][2] = cen_error;
         data[i][3] = ext_error;
 
+        cout << scientific << setprecision(5) 
+             << setw(15) << h 
+             << setw(20) << fwd_error 
+             << setw(20) << cen_error 
+             << setw(25) << ext_error << endl;
+
         file << scientific << setprecision(5) 
              << h 
              << " " << fwd_error 
              << " " << cen_error 
              << " " << ext_error << endl;
 
-        cout << scientific << setprecision(5) 
-             << setw(15) << h 
-             << setw(20) << fwd_error 
-             << setw(20) << cen_error 
-             << setw(25) << ext_error << endl;
         h /= 10.0;
+        i++;
     }
-
     file.close();
 
-   
+    ofstream file_s("slope.txt");
+
+    for (int i = 1; i < 16; i++){
+        double fwd_slope = (log(data[i][1]) - log(data[i-1][1])) / (log(data[i][0]) - log(data[i-1][0]));
+        double cen_slope = (log(data[i][2]) - log(data[i-1][2])) / (log(data[i][0]) - log(data[i-1][0]));
+        double ext_slope = (log(data[i][3]) - log(data[i-1][3])) / (log(data[i][0]) - log(data[i-1][0]));
+        
+        file_s << scientific << setprecision(5) 
+         << data[i][0]
+         << " " << fwd_slope 
+         << " " << cen_slope 
+         << " " << ext_slope << endl;
         
     
+    }
+    file_s.close();
 
     return 0;
+
 }
