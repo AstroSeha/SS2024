@@ -1,17 +1,13 @@
 set terminal pngcairo
-set output 'task2.png'
-set logscale xy
+set output 'task2_F1.png'
+set logscale x
 set xlabel "Number of intervals (N)"
 set ylabel "Integrated Value"
+set title "F1"
 set grid
 set key right top
 plot "results_F1.txt" using 1:2 with linespoints title "F1, Trapezoid", \
      "results_F1.txt" using 1:3 with linespoints title "F1, Simpson" , \
      "results_F1.txt" using 1:4 with linespoints title "F1, Gauss-Chevyshev" , \
      "results_F1.txt" using 1:5 with linespoints title "F1, Gauss-Legendre" , \
-     "results_F1.txt" using 1:6 with linespoints title "F1, Romberg" , \
-     "results_F2.txt" using 1:2 with linespoints title "F2, Trapezoid", \
-     "results_F2.txt" using 1:3 with linespoints title "F2, Simpson" , \
-     "results_F2.txt" using 1:4 with linespoints title "F2, Gauss-Chevyshev" , \
-     "results_F2.txt" using 1:5 with linespoints title "F2, Gauss-Legendre" , \
-     "results_F2.txt" using 1:6 with linespoints title "F2, Romberg" , \
+     "results_F1.txt" using 1:6 with linespoints title "F1, Romberg" 

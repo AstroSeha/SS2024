@@ -50,6 +50,13 @@ int main() {
         double calc_gauss_legendre = gauss_legendre(f2, a, b, N);
         double calc_romberg = romberg(f2, a, b, 10, 1e-8);
 
+        //mark as -1 when nan
+        if (isnan(calc_trapezoid)) calc_trapezoid = -1;
+        if (isnan(calc_simpson)) calc_simpson = -1;
+        if (isnan(calc_gauss_chebyshev)) calc_gauss_chebyshev = -1;
+        if (isnan(calc_gauss_legendre)) calc_gauss_legendre = -1;
+        if (isnan(calc_romberg)) calc_romberg = -1;
+        
         outfile2 << N << " " << calc_trapezoid << " " << calc_simpson << " " << calc_gauss_chebyshev << " " << calc_gauss_legendre << " " << calc_romberg << endl;
     }
     outfile2.close();

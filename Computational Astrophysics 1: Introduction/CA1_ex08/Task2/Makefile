@@ -1,18 +1,17 @@
 CXX = g++
-CXXFLAGS = -O2 -Wall
-TARGET = main
-SRCS = main.cpp
-OUTPUT = results_F1.txt results_F2.txt
-PLOT_SCRIPT = plot.gplt
+CXXFLAGS = -Wall -std=c++11
+TARGET = output
+SOURCES = main.cpp gauss_legendre.cpp gauss_chebyshev.cpp romberg.cpp simpson.cpp trapezoid.cpp
+PLOT_SCRIPT = plot.gplt plot2.gplt
 
-all: $(TARGET) run
+all: $(TARGET)
 
-$(TARGET): $(SRCS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRCS)
-
-run: $(TARGET)
-	./$(TARGET)
+$(TARGET): $(SOURCES)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+	./$@
 	gnuplot $(PLOT_SCRIPT)
 
 clean:
-	rm -f $(TARGET) $(OUTPUT)
+	rm -f $(TARGET) $(SOURCES:.cpp=.o)
+
+.PHONY: all clean
