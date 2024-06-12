@@ -9,7 +9,7 @@ double f(double t) {
     return exp(-t);
 }
 
-double trapezoid_rule(double (*func)(double), double a, double b, int N) {
+double trapezoid(double (*func)(double), double a, double b, int N) {
     double h = (b - a) / N;
     double sum = 0.5 * (func(a) + func(b));
     for (int i = 1; i < N; ++i) {
@@ -18,7 +18,7 @@ double trapezoid_rule(double (*func)(double), double a, double b, int N) {
     return h * sum;
 }
 
-double simpson_rule(double (*func)(double), double a, double b, int N) {
+double simpson(double (*func)(double), double a, double b, int N) {
     double h = (b - a) / N;
     double sum = func(a) + func(b);
     for (int i = 1; i < N; i += 2) { // Odd terms
@@ -43,8 +43,8 @@ int main() {
 
     for (int i = 0; i < num_N_values; ++i) {
         int N = N_values[i];
-        double C_trapezoid = trapezoid_rule(f, a, b, N);
-        double C_simpson = simpson_rule(f, a, b, N);
+        double C_trapezoid = trapezoid(f, a, b, N);
+        double C_simpson = simpson(f, a, b, N);
         errors_trapezoid[i] = (C_trapezoid - C_exact)/C_exact;
         errors_simpson[i] = (C_simpson - C_exact)/C_exact;
         outfile << N <<" " << errors_trapezoid[i] << " " << errors_simpson[i] << endl;

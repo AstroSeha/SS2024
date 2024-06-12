@@ -5,7 +5,13 @@ set xlabel "Number of intervals (N)"
 set ylabel "Integrated Value"
 set grid
 set key right top
-plot "results_F1.txt" using 1:2 with linespoints title "F1, Trapezoid Rule" linewidth 2 linecolor rgb "#1E90FF" pointsize 1.75 pointtype 9, \
-     "results_F1.txt" using 1:3 with linespoints title "F1, Simpson's Rule" linewidth 2 linecolor rgb "#FFA500" pointsize 1.75 pointtype 11, \
-     "results_F2.txt" using 1:2 with linespoints title "F2, Trapezoid Rule" linewidth 2 linecolor rgb "red" pointsize 1.75 pointtype 9, \
-     "results_F2.txt" using 1:3 with linespoints title "F2, Simpson's Rule" linewidth 2 linecolor rgb "blue" pointsize 1.75 pointtype 11
+plot "results_F1.txt" using 1:2 with linespoints title "F1, Trapezoid", \
+     "results_F1.txt" using 1:3 with linespoints title "F1, Simpson" , \
+     "results_F1.txt" using 1:4 with linespoints title "F1, Gauss-Chevyshev" , \
+     "results_F1.txt" using 1:5 with linespoints title "F1, Gauss-Legendre" , \
+     "results_F1.txt" using 1:6 with linespoints title "F1, Romberg" , \
+     "results_F2.txt" using 1:2 with linespoints title "F2, Trapezoid", \
+     "results_F2.txt" using 1:3 with linespoints title "F2, Simpson" , \
+     "results_F2.txt" using 1:4 with linespoints title "F2, Gauss-Chevyshev" , \
+     "results_F2.txt" using 1:5 with linespoints title "F2, Gauss-Legendre" , \
+     "results_F2.txt" using 1:6 with linespoints title "F2, Romberg" , \
