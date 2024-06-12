@@ -4,4 +4,6 @@ set xlabel "x"
 set ylabel "u(x)"
 set grid
 set key left bottom
-plot "results.txt" using 1:2 with lines title "Numerical Solution" linewidth 2 linecolor rgb "#305DE3"
+f(x) = cos(pi/2 * x) + 2 * sin(pi/2 * x) - 1
+plot "results.txt" using 1:2 with lines title "Numerical Solution" linewidth 2 linecolor rgb "#6B30E3", \
+    f(x) title "Analytic Solution" linewidth 2 linecolor rgb "#55C21C"

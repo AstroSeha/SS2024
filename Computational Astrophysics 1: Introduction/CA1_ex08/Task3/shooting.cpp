@@ -11,7 +11,7 @@ double f2(double x, double y1, double y2);
 double shooting(double a, double b, double alpha, double beta, double h, int n, double tol) {
     double x[n], y1_a[n], y2_a[n], y1_b[n], y2_b[n], y1_c[n], y2_c[n];
     double z_a = (beta - alpha) / (b - a);
-    double z_b = z_a + 0.01;
+    double z_b = z_a + 1e-3;
 
     x[0] = a;
     y1_a[0] = alpha;
