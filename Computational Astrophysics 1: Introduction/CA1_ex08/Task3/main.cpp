@@ -3,6 +3,7 @@
 double f1(double x, double y1, double y2);
 double f2(double x, double y1, double y2);
 double shooting(double a, double b, double alpha, double beta, double h, int n, double tol);
+void ode_euler(double (*f1)(double, double, double), double (*f2)(double, double, double), double y1[], double y2[], double x[], double h, int n);
 
 int main() {
     double a = 0.0;
