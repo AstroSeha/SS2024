@@ -1,0 +1,7 @@
+set terminal pngcairo
+set output 'task3.png'
+set xlabel "x"
+set ylabel "u(x)"
+set grid
+set key left bottom
+plot "results.txt" using 1:2 with lines title "Numerical Solution" linewidth 2 linecolor rgb "#305DE3"
