@@ -9,8 +9,8 @@ double f1(double t) {
     return sin(100*t);
 }
 
-double f1(double t) {
-    return (sin(100*t))**t;
+double f2(double t) {
+    return pow(sin(100*t), t);
 }
 
 double trapezoid_rule(double (*func)(double), double a, double b, int N) {
@@ -37,8 +37,8 @@ double simpson_rule(double (*func)(double), double a, double b, int N) {
 int main() {
     double a = 0.0;
     double b = 2*M_PI;
-    const int num_N_values = 5;
-    int N_values[num_N_values] = {2, 10, 20, 100, 1000};
+    const int num_N_values = 8;
+    int N_values[num_N_values] = {2, 10, 20, 100, 200, 1000, 2000, 10000};
 
     ofstream outfile("results_F1.txt");
     for (int i = 0; i < num_N_values; ++i) {
@@ -49,14 +49,14 @@ int main() {
     }
     outfile.close();
 
-    ofstream outfile("results_F2.txt");
+    ofstream outfile2("results_F2.txt");
     for (int i = 0; i < num_N_values; ++i) {
         int N = N_values[i];
         double C_trapezoid = trapezoid_rule(f2, a, b, N);
         double C_simpson = simpson_rule(f2, a, b, N);
-        outfile << N <<" " << C_trapezoid << " " << C_simpson << endl;
- \   }
-    outfile.close();
+        outfile2 << N <<" " << C_trapezoid << " " << C_simpson << endl;
+    }
+    outfile2.close();
 
     return 0;
 }

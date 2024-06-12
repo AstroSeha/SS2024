@@ -1,0 +1,8 @@
+2 1.5708 1.0472
+10 nan nan
+20 nan nan
+100 nan nan
+200 nan nan
+1000 nan nan
+2000 nan nan
+10000 nan nan
