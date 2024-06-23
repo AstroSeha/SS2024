@@ -1,7 +1,7 @@
 CXX = g++
-CXXFLAGS = -O2 -Wall
+CXXFLAGS = -Wall -std=c++11
 TARGET = output
-SOURCES = main.cpp ode_euler.cpp shooting.cpp
+SOURCES = main.cpp 
 PLOT_SCRIPT = plot.gplt
 
 all: $(TARGET)

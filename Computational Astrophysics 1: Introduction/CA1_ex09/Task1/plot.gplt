@@ -1,0 +1,8 @@
+set terminal pngcairo
+set output 'task1.png'
+set xlabel "Ei [MeV]"
+set ylabel "σ [Mb]"
+set grid
+set key left top
+plot "data.txt" using 1:2 with points title "data", \
+    "results.txt" using 1:2 with lines title "interpolation"
