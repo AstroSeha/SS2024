@@ -1,76 +1,43 @@
 #include <iostream>
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
+#include <X11/Xlib.h>
+#include <unistd.h>
 
 using namespace std;
 
-const int INITIAL_NEUTRONS = 100;
-const double T = 1.0;
+void initial(int& neutrons, double& pc, double& ps, double& lambda, double& t);
+void scatter(int neutrons, double pc, double ps, double lambda, double t, int& captured, int& reflected, int& transmitted, double* x_positions, bool* captured_flags, bool* reflected_flags, bool* transmitted_flags);
+void output(int captured, int reflected, int transmitted, int neutrons);
+void draw(int neutrons, double* x_positions, bool* captured_flags, bool* reflected_flags, bool* transmitted_flags, double pc, double ps, double lambda, double t, double fc, double fr, double ft);
 
-void initial(int& neutrons, double& pc, double& ps, double& lambda) {
-    neutrons = INITIAL_NEUTRONS;
-    pc = PC;
-    ps = PS;
-    lambda = 0.1;  // Example value, adjust as necessary
-}
+int main() {
+    int neutrons_count;
+    double pc, ps, lambda, t;
 
-void scatter(int& captured, int& reflected, int& transmitted, int neutrons, double pc, double ps, double lambda) {
-    captured = 0;
-    reflected = 0;
-    transmitted = 0;
+    initial(neutrons_count, pc, ps, lambda, t);
 
-    srand(time(0));
-    
-    for (int i = 0; i < neutrons; ++i) {
-        double x = 0.0;
+    double* x_positions = new double[neutrons_count];
+    bool* captured_flags = new bool[neutrons_count];
+    bool* reflected_flags = new bool[neutrons_count];
+    bool* transmitted_flags = new bool[neutrons_count];
 
-        while (true) {
-            double step = -lambda * log((double) rand() / RAND_MAX);
-            x += step;
+    int captured, reflected, transmitted;
 
-            double rand_val = (double) rand() / RAND_MAX;
+    scatter(neutrons_count, pc, ps, lambda, t, captured, reflected, transmitted, x_positions, captured_flags, reflected_flags, transmitted_flags);
 
-            if (rand_val < pc) {
-                ++captured;
-                break;
-            } else if (rand_val < pc + ps) {
-                if (x > T) {
-                    ++transmitted;
-                    break;
-                } else if (x < 0) {
-                    ++reflected;
-                    break;
-                }
-            } else {
-                ++reflected;
-                break;
-            }
-        }
-    }
-}
-
-void output(int captured, int reflected, int transmitted, int neutrons) {
-    double fc = (double) captured / neutrons;
-    double fr = (double) reflected / neutrons;
-    double ft = (double) transmitted / neutrons;
+    double fc = (double) captured / neutrons_count;
+    double fr = (double) reflected / neutrons_count;
+    double ft = (double) transmitted / neutrons_count;
 
     cout << "Fraction of captured neutrons: " << fc << endl;
     cout << "Fraction of reflected neutrons: " << fr << endl;
     cout << "Fraction of transmitted neutrons: " << ft << endl;
-}
 
-int main() {
-    int neutrons;
-    double pc, ps, lambda;
+    draw(neutrons_count, x_positions, captured_flags, reflected_flags, transmitted_flags, pc, ps, lambda, t, fc, fr, ft);
 
-    initial(neutrons, pc, ps, lambda);
-
-    int captured, reflected, transmitted;
-
-    scatter(captured, reflected, transmitted, neutrons, pc, ps, lambda);
-
-    output(captured, reflected, transmitted, neutrons);
+    delete[] x_positions;
+    delete[] captured_flags;
+    delete[] reflected_flags;
+    delete[] transmitted_flags;
 
     return 0;
 }
