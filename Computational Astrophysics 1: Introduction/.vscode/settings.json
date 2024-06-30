@@ -8,5 +8,6 @@
         "istream": "cpp",
         "vector": "cpp",
         "new": "cpp"
-    }
+    },
+    "fortran.fortls.disabled": true
 }
