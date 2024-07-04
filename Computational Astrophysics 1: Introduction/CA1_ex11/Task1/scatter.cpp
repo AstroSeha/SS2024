@@ -1,6 +1,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <ofstream>
 
 using namespace std;
 
@@ -12,6 +13,8 @@ void scatter(int neutrons, double pc, double ps, double f, double t, int& captur
     srand(time(0));
     double lambda = 1.;
     double E = 0;
+
+    ofstream outFile("results.txt");
 
     for (int i = 0; i < neutrons; ++i) {
         double x = 0.0;
@@ -34,8 +37,16 @@ void scatter(int neutrons, double pc, double ps, double f, double t, int& captur
                 double cos_theta = 1 - 2 * ((double) rand() / RAND_MAX);
                 double sin_theta = sqrt(1-pow(cos_theta,2));
                 double step_length = -lambda * log((double) rand() / RAND_MAX);
+
                 x += step_length * cos_theta;
+                y += step_length * sin_theta;
                 x_positions[i] = x;
+                y_positions[i] = y;
+
+                // save the results
+
+                
+                
 
                 if (x < 0) {
                     ++reflected;
@@ -55,8 +66,5 @@ void scatter(int neutrons, double pc, double ps, double f, double t, int& captur
     }
 }
 
-    ofstream outFile("results.txt");
-    for (int i = 0; i < n; i++) {
-        double l = 
-    }
+    
     outFile.close();
