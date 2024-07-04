@@ -12,7 +12,7 @@ const int HEIGHT = 600;
 const int PADDING = 50;
 const int PIXEL_SIZE = 5;
 
-void draw(int neutrons, double* x_positions, double* y_positions, bool* captured_flags, bool* reflected_flags, bool* transmitted_flags, double pc, double ps, double lambda, double t, double fc, double fr, double ft) {
+void draw(int neutrons, double* x_positions, bool* captured_flags, bool* reflected_flags, bool* transmitted_flags, double pc, double ps, double f, double t, double fc, double fr, double ft) {
     Display* display = XOpenDisplay(NULL);
     if (display == NULL) {
         cerr << "Cannot open display" << endl;
@@ -59,7 +59,7 @@ void draw(int neutrons, double* x_positions, double* y_positions, bool* captured
 
             for (int i = 0; i < neutrons; ++i) {
                 int x = PADDING + (x_positions[i] / 1.0) * (WIDTH - 2 * PADDING);
-                int y = PADDING + (y_positions[i]);
+                int y = PADDING + rand() % (HEIGHT - 2 * PADDING);
 
                 if (captured_flags[i]) {
                     XSetForeground(display, gc, 0xA98DFA); // violet for captured neutrons
