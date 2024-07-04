@@ -12,7 +12,7 @@ const int HEIGHT = 600;
 const int PADDING = 50;
 const int PIXEL_SIZE = 5;
 
-void draw(int neutrons, double* x_positions, bool* captured_flags, bool* reflected_flags, bool* transmitted_flags, double pc, double ps, double f, double t, double fc, double fr, double ft) {
+void draw(int neutrons, double* x_positions, double* y_positions, bool* captured_flags, bool* reflected_flags, bool* transmitted_flags, double pc, double ps, double f, double t, double fc, double fr, double ft) {
     Display* display = XOpenDisplay(NULL);
     if (display == NULL) {
         cerr << "Cannot open display" << endl;
@@ -47,19 +47,19 @@ void draw(int neutrons, double* x_positions, bool* captured_flags, bool* reflect
             XDrawLine(display, window, gc, t_pos, 0, t_pos, HEIGHT);
 
             stringstream ss;
-            ss << "pc: " << pc << ", ps: " << ps << ", f: " << f << ", number:" << neutrons << ", t: " << t;
+            ss << "pc: " << pc << ", ps: " << ps << ",  number:" << neutrons << ", t: " << t;
             string input_values = ss.str();
             XDrawString(display, window, gc, WIDTH / 4, PADDING, input_values.c_str(), input_values.length());
 
-            XSetForeground(display, gc, 0xA6FFD0);
+            XSetForeground(display, gc, 0xA6E6FF);
             stringstream ss2;
-            ss2 << "fc: " << fc << ", fr: " << fr << ", ft: " << ft;
+            ss2 << "f: " << f << ", fc: " << fc << ", fr: " << fr << ", ft: " << ft;
             string output_values = ss2.str();
             XDrawString(display, window, gc, WIDTH / 4, PADDING + 20, output_values.c_str(), output_values.length());
 
             for (int i = 0; i < neutrons; ++i) {
-                int x = PADDING + (x_positions[i] / 1.0) * (WIDTH - 2 * PADDING);
-                int y = PADDING + rand() % (HEIGHT - 2 * PADDING);
+                int x = PADDING + x_positions[i] * (WIDTH - 2 * PADDING);
+                int y = PADDING + y_positions[i] * (HEIGHT - 2 * PADDING);
 
                 if (captured_flags[i]) {
                     XSetForeground(display, gc, 0xA98DFA); // violet for captured neutrons

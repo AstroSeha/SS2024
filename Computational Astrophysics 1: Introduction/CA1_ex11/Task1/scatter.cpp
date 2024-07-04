@@ -1,7 +1,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-#include <ofstream>
+#include <fstream>
 
 using namespace std;
 
@@ -43,10 +43,7 @@ void scatter(int neutrons, double pc, double ps, double f, double t, int& captur
                 x_positions[i] = x;
                 y_positions[i] = y;
 
-                // save the results
-
-                
-                
+                outFile << step_length << endl;
 
                 if (x < 0) {
                     ++reflected;
@@ -64,7 +61,5 @@ void scatter(int neutrons, double pc, double ps, double f, double t, int& captur
 
         }
     }
-}
-
-    
     outFile.close();
+}
