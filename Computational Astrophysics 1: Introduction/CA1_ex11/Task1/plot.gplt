@@ -1,12 +1,12 @@
 set terminal png
 set output 'task1.png'
-bw = 0.1
+set logscale xy
+bw = 1e-40
+N = 10000
 set boxwidth bw
 bin(x,s)=s*ceil(x/s)
 set style fill solid 0.5
 set xlabel 'Path Length'
-set ylabel 'Frequency'
+set ylabel 'Number'
 
-stats 'results.txt' nooutput; N = STATS_records
-
-plot 'results.txt' using (bin($1,bw)-0.5*bw):(1./(N*bw)) smooth frequency with boxes title 'Path Length Distribution' lc rgb "#00008B"
+plot 'results.txt' using (bin($1, bw)):(1) smooth frequency with boxes title 'Path Length Distribution' lc rgb "#317ED7"

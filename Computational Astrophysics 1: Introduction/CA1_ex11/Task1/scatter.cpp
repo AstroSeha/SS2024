@@ -5,23 +5,20 @@
 
 using namespace std;
 
-void scatter(int neutrons, double pc, double ps, double f, double t, int& captured, int& reflected, int& transmitted, double* x_positions, double* y_positions, bool* captured_flags, bool* reflected_flags, bool* transmitted_flags) {
+void scatter(int neutrons, double pc, double ps, double f, double t, int& captured, int& reflected, int& transmitted, double* x_positions, bool* captured_flags, bool* reflected_flags, bool* transmitted_flags) {
     captured = 0;
     reflected = 0;
     transmitted = 0;
 
     srand(time(0));
-    double lambda = 1.;
-    double E = 0;
+    double E = 1.;
 
     ofstream outFile("results.txt");
 
     for (int i = 0; i < neutrons; ++i) {
         double x = 0.0;
-        double y = (double) rand() / RAND_MAX;
-
+    
         x_positions[i] = x;
-        y_positions[i] = y;
         captured_flags[i] = false;
         reflected_flags[i] = false;
         transmitted_flags[i] = false;
@@ -35,14 +32,12 @@ void scatter(int neutrons, double pc, double ps, double f, double t, int& captur
                 break;
             } else if (r < pc + ps) {
                 double cos_theta = 1 - 2 * ((double) rand() / RAND_MAX);
-                double sin_theta = sqrt(1-pow(cos_theta,2));
+                double lambda = sqrt(E);
                 double step_length = -lambda * log((double) rand() / RAND_MAX);
 
                 x += step_length * cos_theta;
-                y += step_length * sin_theta;
                 x_positions[i] = x;
-                y_positions[i] = y;
-
+                
                 outFile << step_length << endl;
 
                 if (x < 0) {
@@ -56,7 +51,6 @@ void scatter(int neutrons, double pc, double ps, double f, double t, int& captur
                 }
             }
             E = E * (1. - f);
-            lambda = sqrt(E);
 
 
         }

@@ -1,4 +1,4 @@
-set terminal pngcairo
+set terminal png
 set output 'task3.png'
 set xlabel "x"
 set ylabel "u(x)"

@@ -1,9 +1,8 @@
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
-LDFLAGS = -lX11
 TARGET = simulation
 PLOT_SCRIPT = plot.gplt
-SOURCES = main.cpp initial.cpp scatter.cpp output.cpp draw.cpp
+SOURCES = main.cpp initial.cpp scatter.cpp output.cpp 
 
 all: $(TARGET)
 
@@ -14,6 +13,6 @@ $(TARGET): $(SOURCES)
 
 
 clean:
-	rm -f $(TARGET) $(SOURCES:.cpp=.o)
+	rm -f $(TARGET) $(SOURCES:.cpp=.o) results.txt task1.png
 
 .PHONY: all clean

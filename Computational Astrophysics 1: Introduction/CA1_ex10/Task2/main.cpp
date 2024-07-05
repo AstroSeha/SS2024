@@ -23,15 +23,7 @@ int main() {
     int captured, reflected, transmitted;
 
     scatter(neutrons_count, pc, ps, lambda, t, captured, reflected, transmitted, x_positions, captured_flags, reflected_flags, transmitted_flags);
-
-    double fc = (double) captured / neutrons_count;
-    double fr = (double) reflected / neutrons_count;
-    double ft = (double) transmitted / neutrons_count;
-
-    cout << "Fraction of captured neutrons: " << fc << endl;
-    cout << "Fraction of reflected neutrons: " << fr << endl;
-    cout << "Fraction of transmitted neutrons: " << ft << endl;
-
+    output(captured, reflected, transmitted, neutrons_count);
     draw(neutrons_count, x_positions, captured_flags, reflected_flags, transmitted_flags, pc, ps, lambda, t, fc, fr, ft);
 
     delete[] x_positions;
